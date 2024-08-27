@@ -2,7 +2,7 @@
   "name": "bignumber-arr-utils",
   "version": "0.0.1",
   "description": "A lightweight utility library designed for efficient manipulation and calculation of large numbers within arrays",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/joelgnansounou/bignumber-arr-utils.git"
@@ -28,5 +28,12 @@
   "files": [
     "dist"
   ],
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  },
+  "scripts": {
+    "build": "tsc",
+    "ci": "npm run build"
+  }
 }
