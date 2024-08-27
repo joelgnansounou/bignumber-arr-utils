@@ -30,10 +30,13 @@
   ],
   "type": "module",
   "devDependencies": {
+    "prettier": "^3.3.3",
     "typescript": "^5.5.4"
   },
   "scripts": {
     "build": "tsc",
-    "ci": "npm run build"
+    "prettier:format": "prettier --write .",
+    "prettier:check-format": "prettier --check .",
+    "ci": "npm run build && npm run prettier:check-format"
   }
 }
