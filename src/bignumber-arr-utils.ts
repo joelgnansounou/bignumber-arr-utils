@@ -15,8 +15,14 @@ export class BigNumberArrUtils {
     return this.arr;
   }
 
+  add(n: BigNumber.Value) {
+    if (!this.checkInput(n)) return false;
+    this.arr.push(new BigNumber(n));
+    return true;
+  }
+
   private checkInput(n: BigNumber.Value) {
     if (typeof n != 'string') return true;
-    return n != '';
+    return !new BigNumber(n).isNaN();
   }
 }
