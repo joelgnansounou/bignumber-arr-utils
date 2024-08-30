@@ -6,15 +6,17 @@ export class BigNumberArrUtils {
   constructor(...n: BigNumber.Value[]) {
     if (n.length) {
       this.arr = n
-        .filter((arrItem) => {
-          if (typeof arrItem != 'string') return arrItem;
-          return arrItem.length > 0;
-        })
+        .filter((arrItem) => this.checkInput(arrItem))
         .map((arrItem) => new BigNumber(arrItem));
     }
   }
 
   get items() {
     return this.arr;
+  }
+
+  private checkInput(n: BigNumber.Value) {
+    if (typeof n != 'string') return true;
+    return n != '';
   }
 }
