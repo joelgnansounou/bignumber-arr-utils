@@ -21,6 +21,14 @@ export class BigNumberArrUtils {
     return true;
   }
 
+  remove(n: BigNumber.Value) {
+    const index = this.arr.findIndex((arrItem) => arrItem.isEqualTo(n));
+    if (index == -1) return false;
+
+    this.arr.splice(index, 1);
+    return true;
+  }
+
   private checkInput(n: BigNumber.Value) {
     if (typeof n != 'string') return true;
     return !new BigNumber(n).isNaN();
