@@ -29,6 +29,10 @@ export class BigNumberArrUtils {
     return true;
   }
 
+  sum() {
+    return this.arr.reduce((acc, curr) => acc.plus(curr), new BigNumber(0));
+  }
+
   private checkInput(n: BigNumber.Value) {
     if (typeof n != 'string') return true;
     return !new BigNumber(n).isNaN();
