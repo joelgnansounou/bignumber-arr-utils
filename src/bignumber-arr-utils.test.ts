@@ -118,4 +118,73 @@ describe('BigNumberArrUtils', () => {
       ]);
     });
   });
+
+  describe('remove', () => {
+    test("should return false if trying to remove an item that doesn't exists in the arrray", () => {
+      const bigNumberArrUtils = new BigNumberArrUtils();
+      expect(bigNumberArrUtils.remove(1)).toBe(false);
+    });
+
+    test('should remove bigNumber instance from the array', () => {
+      const bigNumberArrUtils = new BigNumberArrUtils(
+        new BigNumber(1),
+        new BigNumber(2),
+      );
+
+      const bigNumber = new BigNumber(1);
+      const result = bigNumberArrUtils.remove(bigNumber);
+
+      expect(result).toBe(true);
+      expect(bigNumberArrUtils.items).toHaveLength(1);
+    });
+
+    test('should remove multiple valid items from the array', () => {
+      const bigNumberArrUtils = new BigNumberArrUtils(1, 2, 3, 4, 5, 6);
+      bigNumberArrUtils.remove(1);
+      bigNumberArrUtils.remove(3);
+      bigNumberArrUtils.remove(4);
+
+      expect(bigNumberArrUtils.items).toHaveLength(3);
+      expect(bigNumberArrUtils.items).toStrictEqual([
+        new BigNumber(2),
+        new BigNumber(5),
+        new BigNumber(6),
+      ]);
+    });
+
+    test('should return false if trying to remove an item that has already been removed', () => {
+      const bigNumberArrUtils = new BigNumberArrUtils(1, 2);
+      bigNumberArrUtils.remove(1);
+      expect(bigNumberArrUtils.remove(1)).toBe(false);
+    });
+
+    test('should remove string representation of a number from the array', () => {
+      const bigNumberArrUtils = new BigNumberArrUtils(1, 2, 3);
+      const result = bigNumberArrUtils.remove('2');
+      expect(result).toBe(true);
+      expect(bigNumberArrUtils.items).toHaveLength(2);
+      expect(bigNumberArrUtils.items).toStrictEqual([
+        new BigNumber(1),
+        new BigNumber(3),
+      ]);
+    });
+
+    test('should remove BigNumber with large precision from the array', () => {
+      const bigNumberArrUtils = new BigNumberArrUtils(
+        '1.0000000000000001',
+        '2.0000000000000002',
+      );
+      const result = bigNumberArrUtils.remove('1.0000000000000001');
+      expect(result).toBe(true);
+      expect(bigNumberArrUtils.items).toHaveLength(1);
+      expect(bigNumberArrUtils.items).toStrictEqual([
+        new BigNumber('2.0000000000000002'),
+      ]);
+    });
+
+    test('should return false when trying to remove from an empty array', () => {
+      const bigNumberArrUtils = new BigNumberArrUtils();
+      expect(bigNumberArrUtils.remove(1)).toBe(false);
+    });
+  });
 });
