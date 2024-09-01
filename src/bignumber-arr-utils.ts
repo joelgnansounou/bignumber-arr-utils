@@ -1,27 +1,37 @@
 import BigNumber from 'bignumber.js';
 
-export class BigNumberArrUtils {
+import { BigNumberValidator } from './validator';
+
+// Interface for array utility operations
+interface IArrayUtils<T> {
+  items: T[];
+  add(item: T): boolean;
+  remove(item: T): boolean;
+  sum(): T;
+}
+
+export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
   private readonly arr: BigNumber[] = [];
 
   constructor(...n: BigNumber.Value[]) {
     if (n.length) {
       this.arr = n
-        .filter((arrItem) => this.checkInput(arrItem))
+        .filter((arrItem) => BigNumberValidator.isValid(arrItem))
         .map((arrItem) => new BigNumber(arrItem));
     }
   }
 
-  get items() {
+  get items(): BigNumber[] {
     return this.arr;
   }
 
-  add(n: BigNumber.Value) {
-    if (!this.checkInput(n)) return false;
+  add(n: BigNumber.Value): boolean {
+    if (!BigNumberValidator.isValid(n)) return false;
     this.arr.push(new BigNumber(n));
     return true;
   }
 
-  remove(n: BigNumber.Value) {
+  remove(n: BigNumber.Value): boolean {
     const index = this.arr.findIndex((arrItem) => arrItem.isEqualTo(n));
     if (index == -1) return false;
 
@@ -29,12 +39,7 @@ export class BigNumberArrUtils {
     return true;
   }
 
-  sum() {
+  sum(): BigNumber {
     return this.arr.reduce((acc, curr) => acc.plus(curr), new BigNumber(0));
-  }
-
-  private checkInput(n: BigNumber.Value) {
-    if (typeof n != 'string') return true;
-    return !new BigNumber(n).isNaN();
   }
 }
