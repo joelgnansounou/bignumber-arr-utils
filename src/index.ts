@@ -1,1 +1,1 @@
-export * from './bignumber-arr-utils.js';
+export * from './bignumber-arr-utils';

@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 
-import { BigNumberValidator } from './validator.js';
+import { BigNumberValidator } from './validator';
 
 // Interface for array utility operations
 interface IArrayUtils<T> {
