@@ -31,7 +31,7 @@
   "type": "module",
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.15.4",
-    "@types/bignumber.js": "^5.0.0",
+    "@changesets/cli": "^2.27.7",
     "prettier": "^3.3.3",
     "typescript": "^5.5.4",
     "vitest": "^2.0.5"
@@ -46,6 +46,7 @@
     "check-exports": "attw --pack .",
     "test": "vitest run",
     "dev": "vitest",
-    "ci": "npm run build && npm run prettier:check-format && npm run check-exports && npm run test"
+    "ci": "npm run build && npm run prettier:check-format && npm run check-exports && npm run test",
+    "local-release": "npm run ci && changeset version && changeset publish"
   }
 }

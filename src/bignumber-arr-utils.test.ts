@@ -194,37 +194,37 @@ describe('BigNumberArrUtils', () => {
       const result = bigNumberArrUtils.sum();
       expect(result).toStrictEqual(new BigNumber(0));
     });
-  
+
     test('should return the single item if array has only one item', () => {
       const bigNumberArrUtils = new BigNumberArrUtils(5);
       const result = bigNumberArrUtils.sum();
       expect(result).toStrictEqual(new BigNumber(5));
     });
-  
+
     test('should correctly sum multiple items', () => {
       const bigNumberArrUtils = new BigNumberArrUtils(1, 2, 3, 4, 5);
       const result = bigNumberArrUtils.sum();
       expect(result).toStrictEqual(new BigNumber(15));
     });
-  
+
     test('should correctly sum items with decimal values', () => {
       const bigNumberArrUtils = new BigNumberArrUtils('1.5', '2.5', '3.5');
       const result = bigNumberArrUtils.sum();
       expect(result).toStrictEqual(new BigNumber('7.5'));
     });
-  
+
     test('should correctly sum negative numbers', () => {
       const bigNumberArrUtils = new BigNumberArrUtils(-1, -2, -3, -4, -5);
       const result = bigNumberArrUtils.sum();
       expect(result).toStrictEqual(new BigNumber(-15));
     });
-  
+
     test('should correctly sum a mix of positive and negative numbers', () => {
       const bigNumberArrUtils = new BigNumberArrUtils(-1, 2, -3, 4, -5);
       const result = bigNumberArrUtils.sum();
       expect(result).toStrictEqual(new BigNumber(-3));
     });
-  
+
     test('should correctly sum items with large values', () => {
       const bigNumberArrUtils = new BigNumberArrUtils(
         '1e+18',
@@ -234,7 +234,7 @@ describe('BigNumberArrUtils', () => {
       const result = bigNumberArrUtils.sum();
       expect(result).toStrictEqual(new BigNumber('6e+18'));
     });
-  
+
     test('should correctly sum items with high precision decimal values', () => {
       const bigNumberArrUtils = new BigNumberArrUtils(
         '1.0000000000000001',
