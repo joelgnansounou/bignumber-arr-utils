@@ -9,3 +9,88 @@ A lightweight utility library designed for efficient manipulation and calculatio
 ```bash
 $ npm i bignumber-arr-utils
 ```
+
+## Usage
+
+To get started, import the `BigNumberArrUtils` class from the package:
+
+```typescript
+import BigNumber from 'bignumber.js';
+import { BigNumberArrUtils } from 'bignumber-arr-utils';
+```
+
+## Example Usage
+
+### ***Creating an Instance***
+
+Creates an instance of `BigNumberArrUtils` and initializes the array with valid `BigNumber` instances.
+
+- **Parameters:**
+  - `...n` - A list of values to be converted to `BigNumber` and added to the array.
+
+```typescript
+const arr = new BigNumberArrUtils(1, '2', new BigNumber(3));
+```
+
+### ***Getting the items on the array***
+
+Returns the list of BigNumber instances in the array.
+
+```typescript
+const arr = new BigNumberArrUtils(1, '2', new BigNumber(3));
+console.log(arr.items);         // [BigNumber(1), BigNumber(2), BigNumber(3)]
+```
+
+### ***Adding Items***
+
+Adds a new BigNumber instance to the array. Returns false if the given input is not a valid BigNumber.Value. Returns true if the new BigNumber instance has been added to the array.
+
+- **Parameters:**
+  - `n` - The value to be added as a BigNumber.
+
+```typescript
+const arr = new BigNumberArrUtils();
+console.log(arr.add(-0.8));     // true
+console.log(arr.add('abc'));    // false
+console.log(arr.add(3e+18));    // true
+console.log(arr.items);         // [BigNumber(-0.8), BigNumber(3e+18)]
+```
+
+### ***Removing Items***
+
+Removes an instance of BigNumber from the array. Returns false if the given input is not found in the array. Returns true if the BigNumber has been removed from the array.
+
+- **Parameters:**
+  - `n` - The value to be removed from the array.
+
+```typescript
+const arr = new BigNumberArrUtils(-0.8, 3e+18, 1.0000000000000001);
+console.log(arr.remove(-1));        // false
+console.log(arr.remove(3e+18));     // true
+console.log(arr.items);             // [BigNumber(-0.8), BigNumber(1.0000000000000001)]
+```
+
+### ***Calculating the Sum***
+
+Returns the sum of all BigNumber instances in the array.
+
+```typescript
+const arr = new BigNumberArrUtils(-0.8, 3e+18, 1.0000000000000001);
+console.log(arr.sum().toString());  // "3000000000000000001.2"
+```
+
+# Contributing
+
+If you want to contribute to this project, please follow these steps:
+
+1.	Fork the repository.
+2.	Create a new branch (git checkout -b feature/your-feature).
+3.	Commit your changes (git commit -am 'Add some feature').
+4.	Push to the branch (git push origin feature/your-feature).
+5.	Create a new Pull Request.
+
+## Licence
+
+The MIT Licence.
+
+See [LICENCE](https://github.com/joelgnansounou/bignumber-arr-utils/tree/master?tab=MIT-1-ov-file).
