@@ -128,4 +128,22 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
       arrItem.isLessThan(min) ? arrItem : min,
     );
   }
+
+  /**
+   * Returns the maximum of all BigNumber instances in the array.
+   *
+   * ```ts
+   * const arr = new BigNumberArrUtils(-0.8, 3e+18, 1.0000000000000001);
+   * console.log(arr.max().toString());       // "3e+18"
+   * ```
+   * @throws {Error} If the array is empty.
+   */
+  max(): BigNumber {
+    if (!this.arr.length)
+      throw new Error('Array is empty, cannot determine maximum');
+
+    return this.arr.reduce((max, arrItem) =>
+      arrItem.isGreaterThan(max) ? arrItem : max,
+    );
+  }
 }
