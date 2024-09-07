@@ -245,4 +245,19 @@ describe('BigNumberArrUtils', () => {
       expect(result).toStrictEqual(new BigNumber('6.0000000000000006'));
     });
   });
+
+  describe('min', () => {
+    test('should throw an error when the array is empty', () => {
+      const arr = new BigNumberArrUtils();
+      expect(() => arr.min()).toThrow(
+        'Array is empty, cannot determine minimum',
+      );
+    });
+
+    test('should return the min', () => {
+      const bigNumberArrUtils = new BigNumberArrUtils(1, 2, 3, 4, 5);
+      const result = bigNumberArrUtils.min();
+      expect(result).toStrictEqual(new BigNumber(1));
+    });
+  });
 });
