@@ -7,7 +7,7 @@ A lightweight utility library designed for efficient manipulation and calculatio
 ## Install
 
 ```bash
-$ npm i bignumber-arr-utils
+npm i bignumber-arr-utils
 ```
 
 ## Usage
@@ -79,16 +79,52 @@ const arr = new BigNumberArrUtils(-0.8, 3e18, 1.0000000000000001);
 console.log(arr.sum().toString()); // "3000000000000000001.2"
 ```
 
+### **_Determining the Min_**
+
+Returns the minimum of all BigNumber instances in the array.
+
+```typescript
+const arr = new BigNumberArrUtils(-0.8, 3e18, 1.0000000000000001);
+console.log(arr.min().toString()); // "-0.8"
+```
+
+### **_Determining the Max_**
+
+Returns the maximum of all BigNumber instances in the array.
+
+```typescript
+const arr = new BigNumberArrUtils(-0.8, 3e18, 1.0000000000000001);
+console.log(arr.max().toString()); // "3e18"
+```
+
+### **_Checking for an Item in the Array_**
+
+The includes method checks if a specific BigNumber value is present in the array. It returns true if the value is found, and false otherwise.
+
+- **Parameters:**
+  - `n` - The value to check for in the array.
+
+- **Returns:**
+  - `boolean` - `true` if the array contains the specified value; otherwise, `false`.
+
+```typescript
+const arr = new BigNumberArrUtils(-0.8, 3e18, 1.0000000000000001, 5);
+console.log(arr.includes(5)); // true
+console.log(arr.includes(new BigNumber(6))); // false
+console.log(arr.includes('3e18')); // true
+console.log(arr.includes(1.1)); // false
+```
+
 ## Contributing
 
 If you want to contribute to this project, please follow these steps:
 
 <ol>
-    <li>Fork the repository.</li>
-    <li>Create a new branch (git checkout -b feature/your-feature).</li>
-    <li>Commit your changes (git commit -am 'Add some feature').</li>
-    <li>Push to the branch (git push origin feature/your-feature).</li>
-    <li>Create a new Pull Request.</li>
+  <li>Fork the repository.</li>
+  <li>Create a new branch (git checkout -b feature/your-feature).</li>
+  <li>Commit your changes (git commit -am 'Add some feature').</li>
+  <li>Push to the branch (git push origin feature/your-feature).</li>
+  <li>Create a new Pull Request.</li>
 </ol>
 
 ## Licence

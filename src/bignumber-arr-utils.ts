@@ -114,11 +114,12 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
   /**
    * Returns the minimum of all BigNumber instances in the array.
    *
+   * @throws {Error} If the array is empty.
+   * 
    * ```ts
    * const arr = new BigNumberArrUtils(-0.8, 3e+18, 1.0000000000000001);
    * console.log(arr.min().toString());       // "-0.8"
    * ```
-   * @throws {Error} If the array is empty.
    */
   min(): BigNumber {
     if (!this.arr.length)
@@ -127,5 +128,46 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
     return this.arr.reduce((min, arrItem) =>
       arrItem.isLessThan(min) ? arrItem : min,
     );
+  }
+
+  /**
+   * Returns the maximum of all BigNumber instances in the array.
+   * 
+   * @throws {Error} If the array is empty.
+   *
+   * ```ts
+   * const arr = new BigNumberArrUtils(-0.8, 3e+18, 1.0000000000000001);
+   * console.log(arr.max().toString());       // "3e+18"
+   * ```
+   */
+  max(): BigNumber {
+    if (!this.arr.length)
+      throw new Error('Array is empty, cannot determine maximum');
+
+    return this.arr.reduce((max, arrItem) =>
+      arrItem.isGreaterThan(max) ? arrItem : max,
+    );
+  }
+
+  /**
+   * Checks if the array contains a BigNumber instance equivalent to the given value.
+   *
+   * This method converts each BigNumber instance in the array and the input value
+   * to their string representations before checking for inclusion.
+   * This ensures accurate comparison even with floating-point numbers and very large values.
+   *
+   * @param {BigNumber.Value} n - The value to check for in the array.
+   * @returns {boolean} - Returns `true` if the array contains an equivalent BigNumber; otherwise, `false`.
+   *
+   * ```typescript
+   * const arr = new BigNumberArrUtils(-0.8, 3e18, 1.000000001);
+   * console.log(arr.includes(3e18));         // true
+   * console.log(arr.includes(1.000000002));  // false
+   * ```
+   */
+  includes(n: BigNumber.Value): boolean {
+    return this.arr
+      .map((arrItem) => arrItem.toString())
+      .includes(new BigNumber(n).toString());
   }
 }
