@@ -79,16 +79,34 @@ const arr = new BigNumberArrUtils(-0.8, 3e18, 1.0000000000000001);
 console.log(arr.sum().toString()); // "3000000000000000001.2"
 ```
 
+### **_Determining the Min_**
+
+Returns the minimum of all BigNumber instances in the array.
+
+```typescript
+const arr = new BigNumberArrUtils(-0.8, 3e18, 1.0000000000000001);
+console.log(arr.min().toString()); // "-0.8"
+```
+
+### **_Determining the Max_**
+
+Returns the maximum of all BigNumber instances in the array.
+
+```typescript
+const arr = new BigNumberArrUtils(-0.8, 3e18, 1.0000000000000001);
+console.log(arr.max().toString()); // "3e18"
+```
+
 ## Contributing
 
 If you want to contribute to this project, please follow these steps:
 
 <ol>
-    <li>Fork the repository.</li>
-    <li>Create a new branch (git checkout -b feature/your-feature).</li>
-    <li>Commit your changes (git commit -am 'Add some feature').</li>
-    <li>Push to the branch (git push origin feature/your-feature).</li>
-    <li>Create a new Pull Request.</li>
+  <li>Fork the repository.</li>
+  <li>Create a new branch (git checkout -b feature/your-feature).</li>
+  <li>Commit your changes (git commit -am 'Add some feature').</li>
+  <li>Push to the branch (git push origin feature/your-feature).</li>
+  <li>Create a new Pull Request.</li>
 </ol>
 
 ## Licence
