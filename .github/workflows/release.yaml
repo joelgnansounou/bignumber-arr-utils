@@ -1,4 +1,4 @@
-name: CI
+name: Release
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  ci:
+  release:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,5 +26,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run CI
-        run: npm ci
+      - name: Create Release Pull Request
+        uses: changesets/action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
