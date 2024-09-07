@@ -23,15 +23,15 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
    * ```ts
    * // Example with valid numbers
    * const arr = new BigNumberArrUtils(1, '2', new BigNumber(3));
-   * console.log(arr.items); // [BigNumber(1), BigNumber(2), BigNumber(3)]
+   * console.log(arr.items);                  // [BigNumber(1), BigNumber(2), BigNumber(3)]
    *
    * // Example with mixed valid and invalid numbers
    * const arr2 = new BigNumberArrUtils(1, 'invalid', 2);
-   * console.log(arr2.items); // [BigNumber(1), BigNumber(2)]
+   * console.log(arr2.items);                 // [BigNumber(1), BigNumber(2)]
    *
    * // Example with no arguments
    * const arr3 = new BigNumberArrUtils();
-   * console.log(arr3.items); // []
+   * console.log(arr3.items);                 // []
    * ```
    *
    * @param {...BigNumber.Value[]} n - A list of values to be converted to `BigNumber` and added to the array.
@@ -49,7 +49,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
    *
    * ```ts
    * arr = new BigNumberArrUtils(-0.8, '1.0000000000000001', new BigNumber('3e+18'))
-   * console.log(arr2.items);          // [BigNumber(-0.8), BigNumber(1.0000000000000001), BigNumber(3e+18)]
+   * console.log(arr.items);                  // [BigNumber(-0.8), BigNumber(1.0000000000000001), BigNumber(3e+18)]
    * ```
    */
   get items(): BigNumber[] {
@@ -66,7 +66,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
    * arr.add(-0.8);                          // true
    * arr.add('abc');                         // false
    * arr.add(3e+18);                         // true
-   * console.log(arr2.items);                // [BigNumber(-0.8), BigNumber(3e+18)]
+   * console.log(arr.items);                 // [BigNumber(-0.8), BigNumber(3e+18)]
    * ```
    *
    * @param {BigNumber.Value} n - The value to be added as a BigNumber.
@@ -86,7 +86,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
    * const arr = new BigNumberArrUtils(-0.8, 3e+18, 1.0000000000000001);
    * arr.remove(-1);                          // false
    * arr.remove(3e+18);                       // true
-   * console.log(arr2.items);                // [BigNumber(-0.8), BigNumber(1.0000000000000001)]
+   * console.log(arr.items);                  // [BigNumber(-0.8), BigNumber(1.0000000000000001)]
    * ```
    *
    * @param {BigNumber.Value} n - The value to be removed from the array.
@@ -104,10 +104,46 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
    *
    * ```ts
    * const arr = new BigNumberArrUtils(-0.8, 3e+18, 1.0000000000000001);
-   * console.log(arr2.items);                // BigNumber(3000000000000000001.2)
+   * console.log(arr.sum());                  // BigNumber(3000000000000000001.2)
    * ```
    */
   sum(): BigNumber {
     return this.arr.reduce((acc, curr) => acc.plus(curr), new BigNumber(0));
+  }
+
+  /**
+   * Returns the minimum of all BigNumber instances in the array.
+   *
+   * ```ts
+   * const arr = new BigNumberArrUtils(-0.8, 3e+18, 1.0000000000000001);
+   * console.log(arr.min().toString());       // "-0.8"
+   * ```
+   * @throws {Error} If the array is empty.
+   */
+  min(): BigNumber {
+    if (!this.arr.length)
+      throw new Error('Array is empty, cannot determine minimum');
+
+    return this.arr.reduce((min, arrItem) =>
+      arrItem.isLessThan(min) ? arrItem : min,
+    );
+  }
+
+  /**
+   * Returns the maximum of all BigNumber instances in the array.
+   *
+   * ```ts
+   * const arr = new BigNumberArrUtils(-0.8, 3e+18, 1.0000000000000001);
+   * console.log(arr.max().toString());       // "3e+18"
+   * ```
+   * @throws {Error} If the array is empty.
+   */
+  max(): BigNumber {
+    if (!this.arr.length)
+      throw new Error('Array is empty, cannot determine maximum');
+
+    return this.arr.reduce((max, arrItem) =>
+      arrItem.isGreaterThan(max) ? arrItem : max,
+    );
   }
 }
