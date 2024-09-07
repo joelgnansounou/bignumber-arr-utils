@@ -115,7 +115,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
    * Returns the minimum of all BigNumber instances in the array.
    *
    * @throws {Error} If the array is empty.
-   * 
+   *
    * ```ts
    * const arr = new BigNumberArrUtils(-0.8, 3e+18, 1.0000000000000001);
    * console.log(arr.min().toString());       // "-0.8"
@@ -132,7 +132,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
 
   /**
    * Returns the maximum of all BigNumber instances in the array.
-   * 
+   *
    * @throws {Error} If the array is empty.
    *
    * ```ts

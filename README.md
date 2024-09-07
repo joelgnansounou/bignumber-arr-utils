@@ -102,6 +102,7 @@ console.log(arr.max().toString()); // "3e18"
 The includes method checks if a specific BigNumber value is present in the array. It returns true if the value is found, and false otherwise.
 
 - **Parameters:**
+
   - `n` - The value to check for in the array.
 
 - **Returns:**
