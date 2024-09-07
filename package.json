@@ -1,6 +1,6 @@
 {
   "name": "bignumber-arr-utils",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "A lightweight utility library designed for efficient manipulation and calculation of large numbers within arrays",
   "main": "dist/index.js",
   "repository": {
