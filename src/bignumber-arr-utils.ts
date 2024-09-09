@@ -192,4 +192,21 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
       acc.times(curr),
     );
   }
+
+  /**
+   * Calculate the average of all BigNumber instances in the array.
+   *
+   * @throws {Error} If the array is empty.
+   *
+   * ```ts
+   * const arr = new BigNumberArrUtils(2, 4, 6, 8);
+   * console.log(arr.mean().toString());   // "5"
+   * ```
+   */
+  mean(): BigNumber {
+    if (!this.arr.length)
+      throw new Error('Array is empty, cannot determine average');
+
+    return this.sum().dividedBy(this.arr.length);
+  }
 }

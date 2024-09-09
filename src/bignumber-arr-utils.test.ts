@@ -304,7 +304,7 @@ describe('BigNumberArrUtils', () => {
   });
 
   describe('product', () => {
-    test('should return 0 for an empty array', () => {
+    test('should return throw for an empty array', () => {
       const arr = new BigNumberArrUtils();
       expect(() => arr.product()).toThrow(
         'Array is empty, cannot determine product',
@@ -317,37 +317,37 @@ describe('BigNumberArrUtils', () => {
       expect(result).toStrictEqual(new BigNumber(5));
     });
 
-    test('should correctly product multiple items', () => {
+    test('should correctly find the product of multiple items', () => {
       const arr = new BigNumberArrUtils(1, 2, 3, 4, 5);
       const result = arr.product();
       expect(result).toStrictEqual(new BigNumber(120));
     });
 
-    test('should correctly product items with decimal values', () => {
+    test('should correctly find the product of items with decimal values', () => {
       const arr = new BigNumberArrUtils('1.5', '2.5', '3.5');
       const result = arr.product();
       expect(result).toStrictEqual(new BigNumber('13.125'));
     });
 
-    test('should correctly product negative numbers', () => {
+    test('should correctly find the product of negative numbers', () => {
       const arr = new BigNumberArrUtils(-1, -2, -3, -4, -5);
       const result = arr.product();
       expect(result).toStrictEqual(new BigNumber(-120));
     });
 
-    test('should correctly product a mix of positive and negative numbers', () => {
+    test('should correctly find the product of a mix of positive and negative numbers', () => {
       const arr = new BigNumberArrUtils(-1, 2, -3, 4, -5);
       const result = arr.product();
       expect(result).toStrictEqual(new BigNumber(-120));
     });
 
-    test('should correctly product items with large values', () => {
+    test('should correctly find the product of items with large values', () => {
       const arr = new BigNumberArrUtils('1e+18', '2e+18', '3e+18');
       const result = arr.product();
       expect(result).toStrictEqual(new BigNumber('6e+54'));
     });
 
-    test('should correctly product items with high precision decimal values', () => {
+    test('should correctly find the product of items with high precision decimal values', () => {
       const arr = new BigNumberArrUtils(
         '1.0000000000000001',
         '2.0000000000000002',
@@ -357,6 +357,61 @@ describe('BigNumberArrUtils', () => {
       expect(result).toStrictEqual(
         new BigNumber('6.000000000000001800000000000000180000000000000006'),
       );
+    });
+  });
+
+  describe('mean', () => {
+    test('should return throw for an empty array', () => {
+      const arr = new BigNumberArrUtils();
+      expect(() => arr.mean()).toThrow(
+        'Array is empty, cannot determine average',
+      );
+    });
+
+    test('should return the single item if array has only one item', () => {
+      const arr = new BigNumberArrUtils(101);
+      const result = arr.mean();
+      expect(result).toStrictEqual(new BigNumber(101));
+    });
+
+    test('should correctly find the average of multiple items', () => {
+      const arr = new BigNumberArrUtils(1, 2, 3, 4, 5);
+      const result = arr.mean();
+      expect(result).toStrictEqual(new BigNumber(3));
+    });
+
+    test('should correctly find the average items with decimal values', () => {
+      const arr = new BigNumberArrUtils('1.5', '2.5', '3.5');
+      const result = arr.mean();
+      expect(result).toStrictEqual(new BigNumber('2.5'));
+    });
+
+    test('should correctly find the average negative numbers', () => {
+      const arr = new BigNumberArrUtils(-1, -2, -3, -4, -5);
+      const result = arr.mean();
+      expect(result).toStrictEqual(new BigNumber(-3));
+    });
+
+    test('should correctly find the average a mix of positive and negative numbers', () => {
+      const arr = new BigNumberArrUtils(-1, 2, -3, 4, -5);
+      const result = arr.mean();
+      expect(result).toStrictEqual(new BigNumber(-0.6));
+    });
+
+    test('should correctly find the average items with large values', () => {
+      const arr = new BigNumberArrUtils('1e+18', '2e+18', '3e+18');
+      const result = arr.mean();
+      expect(result).toStrictEqual(new BigNumber('2e+18'));
+    });
+
+    test('should correctly find the average items with high precision decimal values', () => {
+      const arr = new BigNumberArrUtils(
+        '1.0000000000000001',
+        '2.0000000000000002',
+        '3.0000000000000003',
+      );
+      const result = arr.mean();
+      expect(result).toStrictEqual(new BigNumber('2.0000000000000002'));
     });
   });
 });
