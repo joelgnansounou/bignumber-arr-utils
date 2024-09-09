@@ -302,4 +302,61 @@ describe('BigNumberArrUtils', () => {
       expect(result).toBe(false);
     });
   });
+
+  describe('product', () => {
+    test('should return 0 for an empty array', () => {
+      const arr = new BigNumberArrUtils();
+      expect(() => arr.product()).toThrow(
+        'Array is empty, cannot determine product',
+      );
+    });
+
+    test('should return the single item if array has only one item', () => {
+      const arr = new BigNumberArrUtils(5);
+      const result = arr.product();
+      expect(result).toStrictEqual(new BigNumber(5));
+    });
+
+    test('should correctly product multiple items', () => {
+      const arr = new BigNumberArrUtils(1, 2, 3, 4, 5);
+      const result = arr.product();
+      expect(result).toStrictEqual(new BigNumber(120));
+    });
+
+    test('should correctly product items with decimal values', () => {
+      const arr = new BigNumberArrUtils('1.5', '2.5', '3.5');
+      const result = arr.product();
+      expect(result).toStrictEqual(new BigNumber('13.125'));
+    });
+
+    test('should correctly product negative numbers', () => {
+      const arr = new BigNumberArrUtils(-1, -2, -3, -4, -5);
+      const result = arr.product();
+      expect(result).toStrictEqual(new BigNumber(-120));
+    });
+
+    test('should correctly product a mix of positive and negative numbers', () => {
+      const arr = new BigNumberArrUtils(-1, 2, -3, 4, -5);
+      const result = arr.product();
+      expect(result).toStrictEqual(new BigNumber(-120));
+    });
+
+    test('should correctly product items with large values', () => {
+      const arr = new BigNumberArrUtils('1e+18', '2e+18', '3e+18');
+      const result = arr.product();
+      expect(result).toStrictEqual(new BigNumber('6e+54'));
+    });
+
+    test('should correctly product items with high precision decimal values', () => {
+      const arr = new BigNumberArrUtils(
+        '1.0000000000000001',
+        '2.0000000000000002',
+        '3.0000000000000003',
+      );
+      const result = arr.product();
+      expect(result).toStrictEqual(
+        new BigNumber('6.000000000000001800000000000000180000000000000006'),
+      );
+    });
+  });
 });
