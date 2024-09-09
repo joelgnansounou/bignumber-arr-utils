@@ -100,7 +100,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
   }
 
   /**
-   * Returns the sum of all BigNumber instances in the array.
+   * Calculate the sum of all BigNumber instances in the array.
    *
    * ```ts
    * const arr = new BigNumberArrUtils(-0.8, 3e+18, 1.0000000000000001);
@@ -108,14 +108,17 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
    * ```
    */
   sum(): BigNumber {
-    return this.arr.reduce((acc, curr) => acc.plus(curr), new BigNumber(0));
+    return this.arr.reduce(
+      (acc: BigNumber, curr: BigNumber) => acc.plus(curr),
+      new BigNumber(0),
+    );
   }
 
   /**
    * Returns the minimum of all BigNumber instances in the array.
    *
    * @throws {Error} If the array is empty.
-   * 
+   *
    * ```ts
    * const arr = new BigNumberArrUtils(-0.8, 3e+18, 1.0000000000000001);
    * console.log(arr.min().toString());       // "-0.8"
@@ -125,14 +128,14 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
     if (!this.arr.length)
       throw new Error('Array is empty, cannot determine minimum');
 
-    return this.arr.reduce((min, arrItem) =>
+    return this.arr.reduce((min: BigNumber, arrItem: BigNumber) =>
       arrItem.isLessThan(min) ? arrItem : min,
     );
   }
 
   /**
    * Returns the maximum of all BigNumber instances in the array.
-   * 
+   *
    * @throws {Error} If the array is empty.
    *
    * ```ts
@@ -144,7 +147,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
     if (!this.arr.length)
       throw new Error('Array is empty, cannot determine maximum');
 
-    return this.arr.reduce((max, arrItem) =>
+    return this.arr.reduce((max: BigNumber, arrItem: BigNumber) =>
       arrItem.isGreaterThan(max) ? arrItem : max,
     );
   }
@@ -169,5 +172,24 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
     return this.arr
       .map((arrItem) => arrItem.toString())
       .includes(new BigNumber(n).toString());
+  }
+
+  /**
+   * Calculate the product of all BigNumber instances in the array.
+   *
+   * @throws {Error} If the array is empty.
+   *
+   * ```ts
+   * const arr = new BigNumberArrUtils(1, 2, 3, 4);
+   * console.log(arr.product().toString());   // "24"
+   * ```
+   */
+  product(): BigNumber {
+    if (!this.arr.length)
+      throw new Error('Array is empty, cannot determine product');
+
+    return this.arr.reduce((acc: BigNumber, curr: BigNumber) =>
+      acc.times(curr),
+    );
   }
 }
