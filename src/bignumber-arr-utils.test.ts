@@ -414,4 +414,40 @@ describe('BigNumberArrUtils', () => {
       expect(result).toStrictEqual(new BigNumber('2.0000000000000002'));
     });
   });
+
+  describe('isGreaterThan', () => {
+    test('should return an empty array when the array is empty', () => {
+      const arr = new BigNumberArrUtils();
+      const result = arr.isGreaterThan(5);
+      expect(result).toStrictEqual([]);
+    });
+
+    test('should correctly find the BigNumber instances greater than the given value', () => {
+      const arr = new BigNumberArrUtils(1, 5, 8, 12);
+      const result = arr.isGreaterThan(5);
+      expect(result).toStrictEqual([new BigNumber(8), new BigNumber(12)]);
+    });
+
+    test('should return an empty array if no items are greater than the given value', () => {
+      const arr = new BigNumberArrUtils(1, 2, 3);
+      const result = arr.isGreaterThan(5);
+      expect(result).toStrictEqual([]);
+    });
+
+    test('should handle decimals and negative numbers correctly', () => {
+      const arr = new BigNumberArrUtils(-10, 0.5, 3.5, 10.1);
+      const result = arr.isGreaterThan(0);
+      expect(result).toStrictEqual([
+        new BigNumber(0.5),
+        new BigNumber(3.5),
+        new BigNumber(10.1),
+      ]);
+    });
+
+    test('should not include values equal to the given value', () => {
+      const arr = new BigNumberArrUtils(5, 5, 8, 12);
+      const result = arr.isGreaterThan(5);
+      expect(result).toStrictEqual([new BigNumber(8), new BigNumber(12)]);
+    });
+  });
 });
