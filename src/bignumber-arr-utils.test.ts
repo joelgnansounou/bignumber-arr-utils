@@ -553,4 +553,55 @@ describe('BigNumberArrUtils', () => {
       ]);
     });
   });
+
+  describe('unique', () => {
+    test('should return an empty array when the array is empty', () => {
+      const arr = new BigNumberArrUtils();
+      const result = arr.unique();
+      expect(result).toStrictEqual([]);
+    });
+
+    test('should return an array with unique BigNumber instances', () => {
+      const arr = new BigNumberArrUtils(2, 3, 2, 5, 5, 10, 35);
+      const result = arr.unique();
+      expect(result).toStrictEqual([
+        new BigNumber(2),
+        new BigNumber(3),
+        new BigNumber(5),
+        new BigNumber(10),
+        new BigNumber(35),
+      ]);
+    });
+
+    test('should return the same array if it contains only one element', () => {
+      const arr = new BigNumberArrUtils(5);
+      const result = arr.unique();
+      expect(result).toStrictEqual([new BigNumber(5)]);
+    });
+
+    test('should return a single element if all elements are identical', () => {
+      const arr = new BigNumberArrUtils(7, 7, 7, 7);
+      const result = arr.unique();
+      expect(result).toStrictEqual([new BigNumber(7)]);
+    });
+
+    test('should handle arrays with non-integer BigNumber values', () => {
+      const arr = new BigNumberArrUtils('1.5', '2.5', '1.5', '3.5');
+      const result = arr.unique();
+      expect(result).toStrictEqual([
+        new BigNumber('1.5'),
+        new BigNumber('2.5'),
+        new BigNumber('3.5'),
+      ]);
+    });
+
+    test('should handle arrays with large BigNumber values', () => {
+      const arr = new BigNumberArrUtils('1e18', '1e18', '2e18');
+      const result = arr.unique();
+      expect(result).toStrictEqual([
+        new BigNumber('1e18'),
+        new BigNumber('2e18'),
+      ]);
+    });
+  });
 });
