@@ -450,4 +450,40 @@ describe('BigNumberArrUtils', () => {
       expect(result).toStrictEqual([new BigNumber(8), new BigNumber(12)]);
     });
   });
+
+  describe('isGreaterThanOrEqualTo', () => {
+    test('should return an empty array when the array is empty', () => {
+      const arr = new BigNumberArrUtils();
+      const result = arr.isGreaterThanOrEqualTo(5);
+      expect(result).toStrictEqual([]);
+    });
+
+    test('should correctly find the BigNumber instances greater than or equal to the given value', () => {
+      const arr = new BigNumberArrUtils(1, 5, 8, 12);
+      const result = arr.isGreaterThanOrEqualTo(5);
+      expect(result).toStrictEqual([
+        new BigNumber(5),
+        new BigNumber(8),
+        new BigNumber(12),
+      ]);
+    });
+
+    test('should return an empty array if no items are greater than or equal to the given value', () => {
+      const arr = new BigNumberArrUtils(1, 2, 3);
+      const result = arr.isGreaterThanOrEqualTo(5);
+      expect(result).toStrictEqual([]);
+    });
+
+    test('should handle both decimals and negative numbers correctly', () => {
+      const arr = new BigNumberArrUtils(-40, -10, -30, 0.5, 3.5, 10.1);
+      const result = arr.isGreaterThanOrEqualTo(-30);
+      expect(result).toStrictEqual([
+        new BigNumber(-10),
+        new BigNumber(-30),
+        new BigNumber(0.5),
+        new BigNumber(3.5),
+        new BigNumber(10.1),
+      ]);
+    });
+  });
 });
