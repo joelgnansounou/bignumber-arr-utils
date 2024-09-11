@@ -267,4 +267,23 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
       arrItem.isLessThanOrEqualTo(value),
     );
   }
+
+  /**
+   * Return an array of unique BigNumber values, removing any duplicates.
+   *
+   * ```ts
+   * const arr = new BigNumberArrUtils(1, 2, 2, 3, 4, 4, 4, 5);
+   * console.log(arr.isLessThanOrEqualTo(8));  // [BigNumber(1), BigNumber(2), BigNumber(3), BigNumber(4), BigNumber(5)]
+   * ```
+   */
+  unique(): BigNumber[] {
+    const seen = new Set<string>();
+
+    return this.arr.filter((arrItem: BigNumber) => {
+      const value = arrItem.toString();
+      if (seen.has(value)) return false;
+      seen.add(value);
+      return true;
+    });
+  }
 }
