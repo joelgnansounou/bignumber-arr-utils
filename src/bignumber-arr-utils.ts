@@ -200,7 +200,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
    *
    * ```ts
    * const arr = new BigNumberArrUtils(2, 4, 6, 8);
-   * console.log(arr.mean().toString());   // "5"
+   * console.log(arr.mean().toString());      // "5"
    * ```
    */
   mean(): BigNumber {
@@ -208,5 +208,20 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
       throw new Error('Array is empty, cannot determine average');
 
     return this.sum().dividedBy(this.arr.length);
+  }
+
+  /**
+   * Return a new array that includes only BigNumber instances that are greater than the given value.
+   *
+   * ```ts
+   * const arr = new BigNumberArrUtils(1, 5, 8, 12);
+   * console.log(arr.isGreaterThan());        // [BigNumber(8), BigNumber(12)]
+   * ```
+   */
+  isGreaterThan(n: BigNumber.Value): BigNumber[] {
+    const value = new BigNumber(n);
+    return this.arr.filter((arrItem: BigNumber) =>
+      arrItem.isGreaterThan(value),
+    );
   }
 }
