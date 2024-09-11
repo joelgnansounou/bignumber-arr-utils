@@ -230,7 +230,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
    *
    * ```ts
    * const arr = new BigNumberArrUtils(1, 5, 8, 12);
-   * console.log(arr.isGreaterThanOrEqualTo());   // [BigNumber(5), BigNumber(8), BigNumber(12)]
+   * console.log(arr.isGreaterThanOrEqualTo(5));   // [BigNumber(5), BigNumber(8), BigNumber(12)]
    * ```
    */
   isGreaterThanOrEqualTo(n: BigNumber.Value): BigNumber[] {
@@ -238,5 +238,18 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
     return this.arr.filter((arrItem: BigNumber) =>
       arrItem.isGreaterThanOrEqualTo(value),
     );
+  }
+
+  /**
+   * Return a new array that includes only BigNumber instances that are less than the given value.
+   *
+   * ```ts
+   * const arr = new BigNumberArrUtils(1, 5, 8, 12);
+   * console.log(arr.isLessThan(6));        // [BigNumber(1), BigNumber(5)]
+   * ```
+   */
+  isLessThan(n: BigNumber.Value): BigNumber[] {
+    const value = new BigNumber(n);
+    return this.arr.filter((arrItem: BigNumber) => arrItem.isLessThan(value));
   }
 }
