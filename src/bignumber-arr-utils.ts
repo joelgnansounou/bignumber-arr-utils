@@ -100,7 +100,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
   }
 
   /**
-   * Calculate the sum of all BigNumber instances in the array.
+   * Calculates the sum of all BigNumber instances in the array.
    *
    * ```ts
    * const arr = new BigNumberArrUtils(-0.8, 3e+18, 1.0000000000000001);
@@ -175,7 +175,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
   }
 
   /**
-   * Calculate the product of all BigNumber instances in the array.
+   * Calculates the product of all BigNumber instances in the array.
    *
    * @throws {Error} If the array is empty.
    *
@@ -194,7 +194,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
   }
 
   /**
-   * Calculate the average of all BigNumber instances in the array.
+   * Calculates the average of all BigNumber instances in the array.
    *
    * @throws {Error} If the array is empty.
    *
@@ -211,8 +211,10 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
   }
 
   /**
-   * Return a new array that includes only BigNumber instances that are greater than the given value.
+   * Returns a new array that includes only BigNumber instances that are greater than the given value.
    *
+   * @param {BigNumber.Value} n - The value to check against in the array.
+   * 
    * ```ts
    * const arr = new BigNumberArrUtils(1, 5, 8, 12);
    * console.log(arr.isGreaterThan(5));        // [BigNumber(8), BigNumber(12)]
@@ -226,8 +228,10 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
   }
 
   /**
-   * Return a new array that includes only BigNumber instances that are greater than or equal to the given value.
+   * Returns a new array that includes only BigNumber instances that are greater than or equal to the given value.
    *
+   * @param {BigNumber.Value} n - The value to check against in the array.
+   * 
    * ```ts
    * const arr = new BigNumberArrUtils(1, 5, 8, 12);
    * console.log(arr.isGreaterThanOrEqualTo(5));   // [BigNumber(5), BigNumber(8), BigNumber(12)]
@@ -241,8 +245,10 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
   }
 
   /**
-   * Return a new array that includes only BigNumber instances that are less than the given value.
+   * Returns a new array that includes only BigNumber instances that are less than the given value.
    *
+   * @param {BigNumber.Value} n - The value to check against in the array.
+   * 
    * ```ts
    * const arr = new BigNumberArrUtils(1, 5, 8, 12);
    * console.log(arr.isLessThan(6));          // [BigNumber(1), BigNumber(5)]
@@ -254,8 +260,10 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
   }
 
   /**
-   * Return a new array that includes only BigNumber instances that are less than or equal to the given value.
+   * Returns a new array that includes only BigNumber instances that are less than or equal to the given value.
    *
+   * @param {BigNumber.Value} n - The value to check against in the array.
+   * 
    * ```ts
    * const arr = new BigNumberArrUtils(1, 7, 8, 12);
    * console.log(arr.isLessThanOrEqualTo(8));  // [BigNumber(1), BigNumber(7), BigNumber(8)]
@@ -269,11 +277,11 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
   }
 
   /**
-   * Return an array of unique BigNumber values, removing any duplicates.
+   * Returns an array of unique BigNumber values, removing any duplicates.
    *
    * ```ts
    * const arr = new BigNumberArrUtils(1, 2, 2, 3, 4, 4, 4, 5);
-   * console.log(arr.isLessThanOrEqualTo(8));  // [BigNumber(1), BigNumber(2), BigNumber(3), BigNumber(4), BigNumber(5)]
+   * console.log(arr.unique());                // [BigNumber(1), BigNumber(2), BigNumber(3), BigNumber(4), BigNumber(5)]
    * ```
    */
   unique(): BigNumber[] {
