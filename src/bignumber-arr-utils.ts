@@ -214,7 +214,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
    * Returns a new array that includes only BigNumber instances that are greater than the given value.
    *
    * @param {BigNumber.Value} n - The value to check against in the array.
-   * 
+   *
    * ```ts
    * const arr = new BigNumberArrUtils(1, 5, 8, 12);
    * console.log(arr.isGreaterThan(5));        // [BigNumber(8), BigNumber(12)]
@@ -231,7 +231,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
    * Returns a new array that includes only BigNumber instances that are greater than or equal to the given value.
    *
    * @param {BigNumber.Value} n - The value to check against in the array.
-   * 
+   *
    * ```ts
    * const arr = new BigNumberArrUtils(1, 5, 8, 12);
    * console.log(arr.isGreaterThanOrEqualTo(5));   // [BigNumber(5), BigNumber(8), BigNumber(12)]
@@ -248,7 +248,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
    * Returns a new array that includes only BigNumber instances that are less than the given value.
    *
    * @param {BigNumber.Value} n - The value to check against in the array.
-   * 
+   *
    * ```ts
    * const arr = new BigNumberArrUtils(1, 5, 8, 12);
    * console.log(arr.isLessThan(6));          // [BigNumber(1), BigNumber(5)]
@@ -263,7 +263,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
    * Returns a new array that includes only BigNumber instances that are less than or equal to the given value.
    *
    * @param {BigNumber.Value} n - The value to check against in the array.
-   * 
+   *
    * ```ts
    * const arr = new BigNumberArrUtils(1, 7, 8, 12);
    * console.log(arr.isLessThanOrEqualTo(8));  // [BigNumber(1), BigNumber(7), BigNumber(8)]
@@ -293,5 +293,25 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
       seen.add(value);
       return true;
     });
+  }
+
+  /**
+   * Calculate the cumulative sum of BigNumber instances in the array.
+   *
+   * ```ts
+   * const arr = new BigNumberArrUtils(1, 2, 3);
+   * console.log(arr.cumulativeSum().map(n => n.toString()));   // ["1", "3", "6"]
+   * ```
+   */
+  cumulativeSum(): BigNumber[] {
+    if (this.arr.length === 0) return [];
+
+    const cumulativeSum: BigNumber[] = [this.arr[0]!];
+
+    for (let j = 1; j < this.arr.length; j++) {
+      cumulativeSum[j] = cumulativeSum[j - 1]!.plus(this.arr[j]!);
+    }
+
+    return cumulativeSum;
   }
 }
