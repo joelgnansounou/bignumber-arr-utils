@@ -296,7 +296,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
   }
 
   /**
-   * Calculate the cumulative sum of BigNumber instances in the array.
+   * Calculates the cumulative sum of BigNumber instances in the array.
    *
    * ```ts
    * const arr = new BigNumberArrUtils(1, 2, 3);
@@ -316,7 +316,7 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
   }
 
   /**
-   * Find the median value of the BigNumber instances in the array.
+   * Finds the median value of the BigNumber instances in the array.
    *
    * @throws {Error} If the array is empty.
    * 
