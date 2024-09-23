@@ -604,4 +604,45 @@ describe('BigNumberArrUtils', () => {
       ]);
     });
   });
+
+  describe('cumulativeSum', () => {
+    test('should return an empty array when the array is empty', () => {
+      const arr = new BigNumberArrUtils();
+      const result = arr.cumulativeSum();
+      expect(result).toStrictEqual([]);
+    });
+
+    test('should return the an array with one item if array has only one item', () => {
+      const arr = new BigNumberArrUtils(5);
+      const result = arr.cumulativeSum();
+      expect(result).toStrictEqual([new BigNumber(5)]);
+    });
+
+    test('should return an array with cumlative sums of BigNumber instances', () => {
+      const arr = new BigNumberArrUtils(2, 3, 2, 5, 5, 10, 35);
+      const result = arr.cumulativeSum();
+      expect(result).toStrictEqual([
+        new BigNumber(2),
+        new BigNumber(5),
+        new BigNumber(7),
+        new BigNumber(12),
+        new BigNumber(17),
+        new BigNumber(27),
+        new BigNumber(62),
+      ]);
+    });
+
+    test('should handle both decimals and negative numbers correctly', () => {
+      const arr = new BigNumberArrUtils(3.5, -40, -10, -30, 0.5, 10.1);
+      const result = arr.cumulativeSum();
+      expect(result).toStrictEqual([
+        new BigNumber('3.5'),
+        new BigNumber('-36.5'),
+        new BigNumber('-46.5'),
+        new BigNumber('-76.5'),
+        new BigNumber('-76'),
+        new BigNumber('-65.9'),
+      ]);
+    });
+  });
 });
