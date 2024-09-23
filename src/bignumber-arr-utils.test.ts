@@ -645,4 +645,25 @@ describe('BigNumberArrUtils', () => {
       ]);
     });
   });
+
+  describe('median', () => {
+    test('should throw an error when the array is empty', () => {
+      const arr = new BigNumberArrUtils();
+      expect(() => arr.median()).toThrow(
+        'Cannot calculate median of an empty array',
+      );
+    });
+
+    test('should return the median when the array has an odd number of items', () => {
+      const arr = new BigNumberArrUtils(1, 3, 9, 7, 5);
+      const result = arr.median();
+      expect(result).toStrictEqual(new BigNumber(5));
+    });
+
+    test('should return the median when the array has an even number of items', () => {
+      const arr = new BigNumberArrUtils(1, 3, 9, 7, 5, 11);
+      const result = arr.median();
+      expect(result).toStrictEqual(new BigNumber(6));
+    });
+  });
 });

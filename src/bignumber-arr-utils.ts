@@ -318,6 +318,8 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
   /**
    * Find the median value of the BigNumber instances in the array.
    *
+   * @throws {Error} If the array is empty.
+   * 
    * ```ts
    * const arr = new BigNumberArrUtils(1, 3, 9, 7, 5);
    * console.log(arr.median().toString());      // "5"
