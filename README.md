@@ -102,6 +102,7 @@ console.log(arr.max().toString()); // "3e18"
 The includes method checks if a specific BigNumber value is present in the array. It returns true if the value is found, and false otherwise.
 
 - **Parameters:**
+
   - `n` - The value to check for in the array.
 
 - **Returns:**
@@ -113,6 +114,108 @@ console.log(arr.includes(5)); // true
 console.log(arr.includes(new BigNumber(6))); // false
 console.log(arr.includes('3e18')); // true
 console.log(arr.includes(1.1)); // false
+```
+
+### **_Calculating the product of all Items in the Array_**
+
+Calculates and returns the product of all BigNumber instances in the array.
+
+```typescript
+const arr = new BigNumberArrUtils('1e+18', '2e+18', '3e+18');
+console.log(arr.product().toString()); // "6e+54"
+```
+
+### **_Calculating the average of all Items in the Array_**
+
+Calculates and returns the average of all BigNumber instances in the array.
+
+```typescript
+const arr = new BigNumberArrUtils(2, 4, 6, 8);
+console.log(arr.mean().toString()); // "5"
+```
+
+### **_Filtering for values greater than a given BigNumber_**
+
+Returns a new array that includes only BigNumber instances greater than the given value.
+
+- **Parameters:**
+
+  - `n` - The value to check against in the array.
+
+```typescript
+const arr = new BigNumberArrUtils(-10, 0.5, 3.5, 10.1);
+console.log(arr.isGreaterThan(0)); // [BigNumber(0.5), BigNumber(3.5), BigNumber(10.1)]
+console.log(arr.isGreaterThan(new BigNumber(3.5))); // [BigNumber(10.1)]
+```
+
+### **_Filtering for values greater than or equal to a given BigNumber_**
+
+Returns a new array that includes only BigNumber instances greater than or equal to the given value.
+
+- **Parameters:**
+
+  - `n` - The value to check against in the array.
+
+```typescript
+const arr = new BigNumberArrUtils(-10, 0.5, 3.5, 10.1);
+console.log(arr.isGreaterThanOrEqualTo(0)); // [BigNumber(0.5), BigNumber(3.5), BigNumber(10.1)]
+console.log(arr.isGreaterThanOrEqualTo(new BigNumber(0.5))); // [BigNumber(0.5), BigNumber(3.5), BigNumber(10.1)]
+console.log(arr.isGreaterThanOrEqualTo('10.1')); // [BigNumber(10.1)]
+```
+
+### **_Filtering for values less than a given BigNumber_**
+
+Returns a new array that includes only BigNumber instances less than the given value.
+
+- **Parameters:**
+
+  - `n` - The value to check against in the array.
+
+```typescript
+const arr = new BigNumberArrUtils(1, 5, 8, 12);
+console.log(arr.isLessThan(6)); // [BigNumber(1), BigNumber(5)]
+console.log(arr.isLessThan(12)); // [BigNumber(1), BigNumber(5), BigNumber(8)]
+```
+
+### **_Filtering for values less than or equal to a given BigNumber_**
+
+Returns a new array that includes only BigNumber instances less than or equal to the given value.
+
+- **Parameters:**
+
+  - `n` - The value to check against in the array.
+
+```typescript
+const arr = new BigNumberArrUtils(1, -7, 8, 12);
+console.log(arr.isLessThanOrEqualTo(0)); // [BigNumber(-7)]
+console.log(arr.isLessThanOrEqualTo(8)); // [BigNumber(1), BigNumber(-7), BigNumber(8)]
+```
+
+### **_Returning Unique BigNumber Values_**
+
+Returns an array of unique BigNumber values, removing any duplicates.
+
+```typescript
+const arr = new BigNumberArrUtils(1, 2, 2, 3, 4, 4, 4, 5);
+console.log(arr.unique()); // [BigNumber(1), BigNumber(2), BigNumber(3), BigNumber(4), BigNumber(5)]
+```
+
+### **_Calculating Cumulative Sum of all Items in the Array_**
+
+Calculates the cumulative sum of BigNumber instances in the array.
+
+```typescript
+const arr = new BigNumberArrUtils(1, 2, 3);
+console.log(arr.cumulativeSum().map(n => n.toString())); // ["1", "3", "6"]
+```
+
+### **_Calculating the median of all Items in the Array_**
+
+Calculates and returns the median of all BigNumber instances in the array.
+
+```typescript
+const arr = new BigNumberArrUtils(2, 4, 6, 8);
+console.log(arr.median().toString()); // "5"
 ```
 
 ## Contributing
