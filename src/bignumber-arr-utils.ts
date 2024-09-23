@@ -314,4 +314,27 @@ export class BigNumberArrUtils implements IArrayUtils<BigNumber> {
 
     return cumulativeSum;
   }
+
+  /**
+   * Find the median value of the BigNumber instances in the array.
+   *
+   * @throws {Error} If the array is empty.
+   * 
+   * ```ts
+   * const arr = new BigNumberArrUtils(1, 3, 9, 7, 5);
+   * console.log(arr.median().toString());      // "5"
+   * ```
+   */
+  median(): BigNumber {
+    if (!this.arr.length)
+      throw new Error('Cannot calculate median of an empty array');
+
+    const sortedArr = this.arr.slice().sort((a, b) => a.comparedTo(b));
+
+    const mid = Math.floor(sortedArr.length / 2);
+
+    if (sortedArr.length % 2 !== 0) return sortedArr[mid]!;
+
+    return sortedArr[mid - 1]!.plus(sortedArr[mid]!).dividedBy(2);
+  }
 }
