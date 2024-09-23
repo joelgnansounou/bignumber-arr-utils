@@ -200,6 +200,24 @@ const arr = new BigNumberArrUtils(1, 2, 2, 3, 4, 4, 4, 5);
 console.log(arr.unique()); // [BigNumber(1), BigNumber(2), BigNumber(3), BigNumber(4), BigNumber(5)]
 ```
 
+### **_Calculating Cumulative Sum of all Items in the Array_**
+
+Calculates the cumulative sum of BigNumber instances in the array.
+
+```typescript
+const arr = new BigNumberArrUtils(1, 2, 3);
+console.log(arr.cumulativeSum().map(n => n.toString())); // ["1", "3", "6"]
+```
+
+### **_Calculating the median of all Items in the Array_**
+
+Calculates and returns the median of all BigNumber instances in the array.
+
+```typescript
+const arr = new BigNumberArrUtils(2, 4, 6, 8);
+console.log(arr.median().toString()); // "5"
+```
+
 ## Contributing
 
 If you want to contribute to this project, please follow these steps:
